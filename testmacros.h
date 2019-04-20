@@ -20,6 +20,8 @@
 #define test(expr, expect) { typedef decltype(expect) _type; testWT<_type>(#expr, #expect, expr, expect, __LINE__); }
 // compare with Strings
 #define testS(expr, expect) testWT<String>(#expr, #expect, expr, expect, __LINE__)
+// compare using type as Type
+#define testTypeHint(expr, expect, type) testWT<type>(#expr, #expect, expr, expect, __LINE__)
 // begin and end test
 #define testBegin() Serial.println("starting tests..."); _errCnt = 0; _testsCnt = 0;
 #define testEnd() Serial.print("finished running ");Serial.print(_testsCnt);Serial.print(" tests, there was "); \
