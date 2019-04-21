@@ -28,11 +28,14 @@
 	
 
 // auto detect types to compare with
-#define test(expr, expect) { typedef decltype(expect) _type; testWT<_type>(#expr, #expect, expr, expect, __LINE__); }
+#define test(expr, expect) testLine(expr, expect, __LINE__)
+#define testLine(expr, expect, line) { typedef decltype(expect) _type; testWT<_type>(#expr, #expect, expr, expect, line); }
 // compare with Strings
-#define testS(expr, expect) testWT<String>(#expr, #expect, expr, expect, __LINE__)
+#define testS(expr, expect) testSLine(expr, expect,  __LINE__)
+#define testSLine(expr, expect, line) testWT<String>(#expr, #expect, expr, expect, line)
 // compare using type as Type
-#define testTypeHint(expr, expect, type) testWT<type>(#expr, #expect, expr, expect, __LINE__)
+#define testTypeHint(expr, expect, type) testTypeHintLine(expr, expect, type, __LINE__)
+#define testTypeHintLine(expr, expect, type, line) testWT<type>(#expr, #expect, expr, expect, line)
 // begin and end test
 #define testBegin() Serial.println("starting tests..."); _errCnt = 0; _testsCnt = 0;
 #define testEnd() Serial.print("finished running ");Serial.print(_testsCnt);Serial.print(" tests, there was "); \
